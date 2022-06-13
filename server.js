@@ -3,6 +3,8 @@ const app = express();
 const articleRouter = require('./routes/articles');
 const mongoose = require('mongoose');
 const Article = require('./models/article')
+const methodOverride = require('method-override');
+
 
 mongoose.connect('mongodb://localhost/blog', {
     useNewUrlParser: true,
@@ -13,8 +15,9 @@ mongoose.connect('mongodb://localhost/blog', {
 
 app.set('view engine', 'ejs');
 
-app.use(express.urlencoded({ extended: false }))
-app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(methodOverride('_method'));
 
 
 app.get('/', async (req, res) => {
