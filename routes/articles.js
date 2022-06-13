@@ -17,6 +17,10 @@ router.get('/:slug', async (req, res) => {
     res.render('articles/shows', { article: article });
     // res.send(req.params.id);
 })
+router.get('/edit/:id', async (req, res) => {
+    const article = await Article.findById(req.params.id);
+    res.render('/articles/edt', { article })
+})
 
 router.post('/', async (req, res) => {
     let article = new Article({
@@ -37,6 +41,9 @@ router.post('/', async (req, res) => {
 router.delete('/:id', async (req, res) => {
     const deletePost = await Article.findByIdAndDelete(req.params.id);
     res.redirect('/');
+})
+router.put('/:id', async (res, req) => {
+
 })
 
 module.exports = router;
